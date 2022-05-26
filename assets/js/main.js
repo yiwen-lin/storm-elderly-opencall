@@ -181,10 +181,10 @@
     });
 
 
-    luxy.init({
-        wrapper: '#spiral',
-        wrapperSpeed: '0.07',
-    });
+    // luxy.init({
+    //     wrapper: '#spiral',
+    //     wrapperSpeed: '0.07',
+    // });
 
     //--------------------------------------------------
     // Cursor
@@ -549,13 +549,44 @@
    
     });
 
+    // var toggler = $('.menu__toggler');
+    // var menu = $('.menus');
+    // toggler.on("click", function () {
+    //     toggler.toggleClass('activez');
+    //     menu.toggleClass('activez');
+    // });
 
 
-    var toggler = $('.menu__toggler');
-    var menu = $('.menus');
-    toggler.on("click", function () {
-        toggler.toggleClass('activez');
-        menu.toggleClass('activez');
-    });
+    //new 
+    $('.navbar .nav-link').click(function () {
+        //手機版 nav click 收合
+        if($(window).innerWidth() <= 820) {
+          $('.navbar-toggler').trigger('click');
+        }
+      });
+
 
 })(jQuery);
+
+
+    //new Smooth scrolling using jQuery easing
+    $(document).ready(function () {
+        $('a.smooth-scroll[href*="#"]:not([href="#"])').click(function () {
+          if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
+            var target = $(this.hash);
+            target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+            if (target.length) {
+              let headerOffset = 56;
+              if ( width >=  992 ) {
+                headerOffset = 70;
+              } else {
+                headerOffset = 56;
+              }
+              $('html, body').animate({
+                scrollTop: (target.offset().top - headerOffset)
+              }, 1000);
+              // return false;
+            }
+          }
+        });
+      })
