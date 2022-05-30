@@ -1154,10 +1154,11 @@ h1.title {
   border-radius: 50px;
   border: 1px solid #000;
   background-color: #fff;
-  padding: 6px 50px;
+  padding: 6px 0px;
   transition: .3s;
   display: inline-block;
   margin-top: 6px;
+  width: 130px;
 }
 .text-folio-info .text-folio-vote:hover {
   background-color: #000;
