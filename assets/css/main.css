@@ -1037,8 +1037,8 @@ h1.title {
 .main-title::before {
   position: absolute;
   width: 70px;
-  height: 2px;
-  background: #000;
+  height: 3px;
+  background: #fff;
   content: '';
   bottom: -20px;
   left: calc(50% - 35px);
@@ -1051,15 +1051,15 @@ h1.title {
 
 .main-title h2 {
   text-transform: uppercase;
-  color: #000;
+  color: #fff;
   font-size: 40px;
-  font-weight: 900;
+  font-weight: 400;
 }
 
 .main-title h2 span {
   -webkit-text-stroke: 1px #000;
   color: #fff;
-  font-weight: 900;
+  font-weight: 600;
 }
 
 .folio-content {
@@ -1069,7 +1069,7 @@ h1.title {
 .folio-content .folio-item {
   margin-top: 170px;
   position: relative;
-  padding: 0 20px;
+  padding: 0 10px;
 }
 .folio-content .folio-item:nth-child(1) {
   margin-top: 80px;
@@ -1312,7 +1312,7 @@ h1.title {
 =====================================================*/
 .footer {
   z-index: -2;
-  padding: 0 0 50px 0;
+  padding: 0 0 30px 0;
 }
 
 .footer a {
@@ -1341,11 +1341,20 @@ h1.title {
 .footer .sosmed ul li a:hover {
   text-decoration: none;
 }
-
-.footer .mail a {
+/* .footer .mail {
+  margin-bottom: 10px;
+} */
+/* .footer .mail a {
   font-size: 12px;
   color: #000;
   font-weight: 600;
+} */
+.footer .mail p {
+    font-size: 13px;
+    color: #fff;
+    line-height: 1.3;
+    margin: 5px 0 0 0;
+    font-weight: 300;
 }
 
 .footer .copyright p {
@@ -1356,7 +1365,8 @@ h1.title {
 }
 
 .footer .logo-foot {
-  margin-bottom: 20px;
+  margin: 0 auto 20px;
+  width: 80%;
 
   }
 
@@ -2044,14 +2054,13 @@ header nav .nav-item:nth-last-child(1) {
 header nav .nav-item-download {
   border-radius: 50px;
   border:1px solid #000;
-  background-color: #000;
+  background-color: #fff;
   padding:0px 6px;
   transition: .3s;
 }
 
 header nav .nav-item-download:hover {
-
-  background-color: #fff;
+  background-color: #000;
 }
 
 header nav .nav-item-download a.nav-link {
@@ -2063,14 +2072,13 @@ header nav .nav-item-download a.nav-link {
 .content-item-download {
   border-radius: 50px;
   border:1px solid #000;
-  background-color: #000;
+  background-color: #fff;
   padding: 12px 30px;
   transition: .3s;
   margin-top: 70px;
 }
 .content-item-download:hover {
-
-  background-color: #fff;
+  background-color: #000;
 }
 .content-item-download a {
   font-size: 18px;
@@ -2200,3 +2208,79 @@ header nav .nav-item-download a.nav-link {
   margin-top: 50px;
 }
 /* tab end */
+
+
+/* award start */
+.award-section {
+  /* background: #d93e27; */
+}
+.award-img img {
+  width: 100%;
+  margin:20px auto;
+}
+/* award end */
+
+
+/* lightbox start */
+/* .folio-content a.lightbox-toggle:not(.lightbox-close) {
+  display: inline-block;
+  background: #d62c1a;
+  height: 200px;
+  width: 200px;
+  line-height: 200px;
+  font-size: 42px;
+  text-align: center;
+  color: #ffffff;
+} */
+
+.lightbox {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+}
+.lightbox .lightbox-video {
+  width: 100%;
+  padding-bottom: 56%;
+}
+.lightbox iframe {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  right: 0;
+}
+.lightbox img {
+  display: block;
+  margin: 0 auto;
+}
+.lightbox .lightbox-close {
+  position: absolute;
+  display: block;
+  top: 30px;
+  right: 30px;
+  color: #ffffff;
+  
+  height: 40px;
+  width: 40px;
+  /* background: rgb(255, 255, 255); */
+  /* border: 2px solid #ffffff; */
+  /* border-radius: 50%; */
+  /* line-height: 50px; */
+  text-align: center;
+  line-height:1;
+  font-size: 40px;
+}
+
+.lightbox .lightbox-close:hover {
+  text-decoration: none;
+}
+.lightbox .lightbox-container {
+  max-width: 1024px;
+  margin: 100px auto 25px;
+}
+/* lightbox end */
