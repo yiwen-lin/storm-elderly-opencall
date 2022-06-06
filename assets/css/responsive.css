@@ -35,7 +35,8 @@
     margin-top: 5vh;
   }
   .main-head h1 {
-    font-size: 30px;
+    font-size: 50px;
+    text-align: center;
   }
   .sub-abt {
     display: none;
@@ -44,10 +45,11 @@
     font-size: 16px;
   }
   .main-title h2 {
-    font-size: 28px;
+    font-size: 32px;
+    line-height: 1.5;
   }
   .folio-content .folio-item {
-    margin-top: 40px;
+    /* margin-top: 40px; */
   }
   .folio-content .folio-item .text-folio h2.text-1 {
     font-size: 30px;
@@ -56,14 +58,14 @@
     font-size: 30px;
   }
   .img-about {
-    display: none;
+    /* display: none; */
   }
   .abt-text {
     padding: 0;
     margin-left: 0;
   }
   .abt-text p {
-    font-size: 14px;
+    /* font-size: 14px; */
   }
   .blog-item {
     padding: 0 20px;
@@ -107,7 +109,7 @@
     font-size: 30px;
   }
   section {
-    padding: 50px 0;
+    padding: 50px 15px;
   }
   .partner {
     padding-right: 20px;
@@ -247,3 +249,4 @@
 
 /* // Large devices (desktops, less than 1200px) RETINA */
 /*# sourceMappingURL=responsive.css.map */
+
