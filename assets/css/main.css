@@ -881,10 +881,10 @@ a {
 
 @media (max-width: 820px) {
   .bg-right {
-    top: 40vh;
-    left: 45%;
-    height: 50vh;
-    width: 60vw;
+    top: 36vh;
+    left: 50%;
+    height: 44vh;
+    width: 40vw;
   }
 
   .bg-3 {
@@ -1104,6 +1104,10 @@ h1.title {
 .import-data p span {
   font-size: 16px;
 }
+.import-data .span2 {
+  display: inline-block;
+  font-size: 30px;
+}
 
 
 @media (max-width: 820px) {
@@ -1119,14 +1123,29 @@ h1.title {
   .import-data:nth-child(3),
   .import-data:nth-child(4) {
     width: 49.5%;
-    margin-bottom: 20px;
+    margin-bottom: 28px;
+    padding: 0 20px;
   }
-
+  .import-data p span{
+    font-size: 24px;
+  }
+  .import-data .span2 {
+    display: block;
+    /* font-size: 30px; */
+  }
+  .main-head {
+    background: url(../img/mb.jpg) center no-repeat;
+    background-size: cover;
+  }
   .heading-text span {
     display: block;
   }
   .heading-text-front,.heading-text-back {
     font-size: ;
+  }
+
+  .heading-text-front,.heading-text-back {
+    top: 40%;
   }
 
 }
@@ -1171,7 +1190,7 @@ h1.title {
 .folio-content .folio-item {
   margin-top: 170px;
   position: relative;
-  padding: 0 10px;
+  padding: 0 0px;
 }
 
 .folio-content .folio-item:nth-child(1) {
