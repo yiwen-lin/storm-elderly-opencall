@@ -909,7 +909,7 @@ a {
 
 .heading-text-front h1 {
   text-transform: uppercase;
-  color: transparent;
+  color: #d0ab0033;
   font-weight: 900;
   font-size: 70px;
   -webkit-text-stroke: 1px #000;
@@ -1122,7 +1122,7 @@ h1.title {
   .import-data,
   .import-data:nth-child(3),
   .import-data:nth-child(4) {
-    width: 49.5%;
+    width: 49%;
     margin-bottom: 28px;
     padding: 0 20px;
   }
@@ -1148,6 +1148,24 @@ h1.title {
     top: 40%;
   }
 
+}
+
+@media (max-width: 380px) {
+  .import-data-block {
+    bottom:2%;
+  }
+  .import-data,
+  .import-data:nth-child(3),
+  .import-data:nth-child(4) {
+    width: 49%;
+  }
+  .import-data p,
+  .import-data .span2 {
+    font-size: 22px;
+  }
+  .import-data p span{
+    font-size: 20px;
+  }
 }
 
 /* ==================================================

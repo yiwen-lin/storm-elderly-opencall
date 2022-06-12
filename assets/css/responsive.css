@@ -250,3 +250,11 @@
 /* // Large devices (desktops, less than 1200px) RETINA */
 /*# sourceMappingURL=responsive.css.map */
 
+
+
+@media (max-width: 380px) {
+  .main-head h1 {
+    font-size: 48px;
+  }
+
+}
