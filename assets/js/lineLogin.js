@@ -21,6 +21,8 @@
                 window.urlParam[a[0]] = a[1]
             }
         }
+
+        toGet();
     };
 
     $(document).on('click', '[data-js="toVote"]', function () {
@@ -34,9 +36,6 @@
         } else if ((undefined !== story && '' != story)) {
             toGetLineUser(story, $(this));
         }
-    });
-    $('#voteBtn').on('click', function () {
-
     });
 
     function toLoginLineUser() {
@@ -138,7 +137,40 @@
                 }
             },
             complete: function () {
-                target.html('今日已投票')
+                target.addClass('text-folio-voted');
+                target.find('a').html('今日已投票')
+            },
+            error: function (res) {
+            }
+        });
+    }
+
+    function toGet() {
+        let url = 'https://script.google.com/macros/s/AKfycbzvJcCZETu26rVunk3uWC6VOCns8QPU1Um_L0vy2VC5Zj2xd9uGYNtjUBu_4sW8IaSA/exec';
+
+        var data = {
+            type: 'getData',
+        };
+
+        $.ajax({
+            type: "POST",
+            dataType: "JSON",
+            url: url,
+            data: JSON.stringify(data),
+            beforeSend: function () {
+            },
+            success: function (res) {
+                if (res) {
+                    for(let i in res) {
+                        let target = $('[data-js="getVote"][data-id="' + i + '"]');
+                        console.log();
+                        if (target.length > 0) {
+                            target.html(res[i]);
+                        }
+                    }
+                }
+            },
+            complete: function () {
             },
             error: function (res) {
             }
