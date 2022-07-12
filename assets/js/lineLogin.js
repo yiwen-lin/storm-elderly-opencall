@@ -3,9 +3,8 @@
 
     window.token = '';
     window.lineCode = '';
+    window.lineRedirectUri = location.protocol + '//' + location.host + location.pathname + window.location.hash;
     window.lineId = '1657294682';
-    // window.lineRedirectUri = 'http://storm-elderly-opencall.tet:8080/lineLogin.html';
-    window.lineRedirectUri = location.protocol + '//' + location.host + location.pathname;
     window.lineChannelSecret = '76af0068c610f74ca8d1539dd98d9f92';
 
     window.onload = function () {
@@ -25,16 +24,16 @@
         toGet();
     };
 
-    $(document).on('click', '[data-js="toVote"]', function () {
-        let target = $(this);
-        let story = $(this).data('id');
-        let type = $(this).attr('data-type');
+    $(document).on('click', '[data-js="voteBtn"][data-vote-type="true"]', function () {
+        let target = $(this).closest('[data-js="vote"]');
+        let story = target.attr('data-vote-id');
+        let type = target.find('[data-js="voteBtn"]').attr('data-vote-type');
 
-        if ('end' == type) {
+        _voteEnd(target);
+        if ('false' == type) {
             alert('今天已參加過投票，請隔日再蒞臨參加。');
-            _voteEnd(target);
         } else if ((undefined !== story && '' != story)) {
-            toGetLineUser(story, $(this));
+            toGetLineUser(story, target);
         }
     });
 
@@ -63,7 +62,6 @@
             data.story = story;
             data.type = 'save';
             toSave(data, target);
-            _voteEnd(target);
         } else {
             let data = {
                 grant_type: 'authorization_code' ,
@@ -90,7 +88,6 @@
                     data.story = story;
                     data.type = 'save';
                     toSave(data, target);
-                    _voteEnd(target);
                 },
                 complete: function () {
                 },
@@ -106,9 +103,6 @@
     function toSave(data, target) {
         let url = 'https://script.google.com/macros/s/AKfycbzvJcCZETu26rVunk3uWC6VOCns8QPU1Um_L0vy2VC5Zj2xd9uGYNtjUBu_4sW8IaSA/exec';
 
-        var SHARE_LINK_URL = window.location.href;
-        var SHARE_LINK_TEXT = '大地男力';
-
         $.ajax({
             type: "POST",
             dataType: "JSON",
@@ -118,31 +112,18 @@
             },
             success: function (res) {
                 if (true == res.isSuccess && '' != res.no) {
-                    var confirmButtonText = '<a href="'
-                        + 'https://www.facebook.com/sharer.php?u='
-                        + SHARE_LINK_URL + '&quote='
-                        + SHARE_LINK_TEXT
-                        + '" target="_blank">分享</a>';
-                    let countTarget = target.closest('.text-folio-info').find('[data-js="getVote"]');
-                    let count = countTarget.text();
-                    countTarget.text(parseInt(count) + 1);
-
-                    alert('投票成功');
-                    // Swal.fire({
-                    //     title: "投票成功",
-                    //     text: "分享到FB，讓女力故事激勵更多人",
-                    //     icon: "success",
-                    //     showCancelButton: true,
-                    //     cancelButtonText: '取消',
-                    //     confirmButtonText: confirmButtonText,
-                    // });
+                    let countTarget = target.find('[data-js="voteCount"]');
+                    let count = parseInt(countTarget.text());
+                    countTarget.text(count + 1);
+                    Swal.fire({
+                        title: "投票成功",
+                        icon: "success"
+                    });
                 } else {
                     alert('今天已參加過投票，請隔日再蒞臨參加。');
                 }
             },
             complete: function () {
-                target.addClass('text-folio-voted');
-                target.find('a').html('今日已投票')
             },
             error: function (res) {
             }
@@ -156,29 +137,34 @@
             type: 'getData',
         };
 
-        $.ajax({
-            type: "POST",
-            dataType: "JSON",
-            url: url,
-            data: JSON.stringify(data),
-            beforeSend: function () {
-            },
-            success: function (res) {
-                if (res) {
-                    for(let i in res) {
-                        let target = $('[data-js="getVote"][data-id="' + i + '"]');
-                        console.log();
-                        if (target.length > 0) {
-                            target.html(res[i]);
-                        }
+        let target = $('[data-js="vote"]');
+
+        if (0 < target.length) {
+            $.ajax({
+                type: "POST",
+                dataType: "JSON",
+                url: url,
+                data: JSON.stringify(data),
+                beforeSend: function () {
+                },
+                success: function (res) {
+                    if (res) {
+                        target.each(function () {
+                            let voteId = $(this).attr('data-vote-id');
+                            $(this).find('[data-js="voteCount"]').text(0);
+                            $(this).find('[data-js="voteBtn"]').attr('data-vote-type', 'true');
+                            if (undefined !== voteId && undefined !== res[voteId] && null !== res[voteId]) {
+                                $(this).find('[data-js="voteCount"]').text(res[voteId]);
+                            }
+                        });
                     }
+                },
+                complete: function () {
+                },
+                error: function () {
                 }
-            },
-            complete: function () {
-            },
-            error: function (res) {
-            }
-        });
+            });
+        }
     }
 
     function getFormUrlencoded(data) {
@@ -194,5 +180,8 @@
 })(jQuery);
 
 function _voteEnd(target) {
-    target.attr('data-type', 'end');
+    target.find('[data-js="voteBtn"]')
+        .addClass('text-folio-voted')
+        .attr('data-vote-type', 'false');
+    target.find('[data-js="voteText"]').html('今日已投票');
 }
