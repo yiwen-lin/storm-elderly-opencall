@@ -21,7 +21,7 @@
             }
         }
 
-        toGet();
+        toGetLineUser();
     };
 
     $(document).on('click', '[data-js="voteBtn"][data-vote-type="true"]', function () {
@@ -29,11 +29,11 @@
         let story = target.attr('data-vote-id');
         let type = target.find('[data-js="voteBtn"]').attr('data-vote-type');
 
-        _voteEnd(target);
+        _voteEnd();
         if ('false' == type) {
             alert('今天已參加過投票，請隔日再蒞臨參加。');
         } else if ((undefined !== story && '' != story)) {
-            toGetLineUser(story, target);
+            toSave(target, story);
         }
     });
 
@@ -47,7 +47,7 @@
         window.location.href = url;
     }
 
-    function toGetLineUser(story, target) {
+    function toGetLineUser() {
         let url = 'https://api.line.me/oauth2/v2.1/token';
 
         for (let i in window.urlParam) {
@@ -56,13 +56,7 @@
             }
         }
 
-        if ('' != window.token) {
-            let data = jwt_decode(window.token);
-
-            data.story = story;
-            data.type = 'save';
-            toSave(data, target);
-        } else {
+        if ('' != window.lineCode && '' == window.token) {
             let data = {
                 grant_type: 'authorization_code' ,
                 code: window.lineCode,
@@ -83,11 +77,8 @@
                 success: function (res) {
                     let token = res.id_token;
                     window.token = token;
-                    let data = jwt_decode(token);
 
-                    data.story = story;
-                    data.type = 'save';
-                    toSave(data, target);
+                    toGet();
                 },
                 complete: function () {
                 },
@@ -97,47 +88,59 @@
                     }
                 }
             });
+        } else {
+            toGet();
         }
     }
 
-    function toSave(data, target) {
+    function toSave(target, story) {
         let url = 'https://script.google.com/macros/s/AKfycbzvJcCZETu26rVunk3uWC6VOCns8QPU1Um_L0vy2VC5Zj2xd9uGYNtjUBu_4sW8IaSA/exec';
 
-        $.ajax({
-            type: "POST",
-            dataType: "JSON",
-            url: url,
-            data: JSON.stringify(data),
-            beforeSend: function () {
-            },
-            success: function (res) {
-                if (true == res.isSuccess && '' != res.no) {
-                    let countTarget = target.find('[data-js="voteCount"]');
-                    let count = parseInt(countTarget.text());
-                    countTarget.text(count + 1);
-                    Swal.fire({
-                        title: "投票成功",
-                        icon: "success"
-                    });
-                } else {
-                    alert('今天已參加過投票，請隔日再蒞臨參加。');
+        if ('' == window.token) {
+            toLoginLineUser();
+        } else if ('' != window.token) {
+            let data = jwt_decode(window.token);
+
+            data.story = story;
+            data.type = 'save';
+
+            $.ajax({
+                type: "POST",
+                dataType: "JSON",
+                url: url,
+                data: JSON.stringify(data),
+                beforeSend: function () {
+                },
+                success: function (res) {
+                    if (true == res.isSuccess && '' != res.no) {
+                        let countTarget = target.find('[data-js="voteCount"]');
+                        let count = parseInt(countTarget.text());
+                        countTarget.text(count + 1);
+                        Swal.fire({
+                            title: "投票成功",
+                            icon: "success"
+                        });
+                    } else {
+                        alert('今天已參加過投票，請隔日再蒞臨參加。');
+                    }
+                },
+                complete: function () {
+                },
+                error: function (res) {
                 }
-            },
-            complete: function () {
-            },
-            error: function (res) {
-            }
-        });
+            });
+        }
     }
 
     function toGet() {
         let url = 'https://script.google.com/macros/s/AKfycbzvJcCZETu26rVunk3uWC6VOCns8QPU1Um_L0vy2VC5Zj2xd9uGYNtjUBu_4sW8IaSA/exec';
-
-        var data = {
-            type: 'getData',
-        };
-
         let target = $('[data-js="vote"]');
+        let data = {};
+        if ('' != window.token) {
+            data = jwt_decode(window.token);
+        }
+
+        data.type = 'getData';
 
         if (0 < target.length) {
             $.ajax({
@@ -148,15 +151,18 @@
                 beforeSend: function () {
                 },
                 success: function (res) {
-                    if (res) {
-                        target.each(function () {
-                            let voteId = $(this).attr('data-vote-id');
-                            $(this).find('[data-js="voteCount"]').text(0);
-                            $(this).find('[data-js="voteBtn"]').attr('data-vote-type', 'true');
-                            if (undefined !== voteId && undefined !== res[voteId] && null !== res[voteId]) {
-                                $(this).find('[data-js="voteCount"]').text(res[voteId]);
-                            }
-                        });
+                    let getData = res.data;
+                    target.each(function () {
+                        let voteId = $(this).attr('data-vote-id');
+                        $(this).find('[data-js="voteCount"]').text(0);
+                        if (undefined !== voteId && undefined !== getData[voteId] && null !== getData[voteId]) {
+                            $(this).find('[data-js="voteCount"]').text(getData[voteId]);
+                        }
+                    });
+                    if (false == res.isSuccess) {
+                        $('[data-js="voteBtn"]').attr('data-vote-type', 'true');
+                    } else {
+                        _voteEnd();
                     }
                 },
                 complete: function () {
@@ -179,9 +185,9 @@
     }
 })(jQuery);
 
-function _voteEnd(target) {
-    target.find('[data-js="voteBtn"]')
+function _voteEnd() {
+    $('[data-js="voteBtn"]')
         .addClass('text-folio-voted')
         .attr('data-vote-type', 'false');
-    target.find('[data-js="voteText"]').html('今日已投票');
+    $('[data-js="voteText"]').html('今日已投票');
 }
