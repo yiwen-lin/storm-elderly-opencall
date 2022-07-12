@@ -3,10 +3,10 @@
 
     window.token = '';
     window.lineCode = '';
-    window.lineId = '1657294682';
+    window.lineId = '1657284666';
     // window.lineRedirectUri = 'http://storm-elderly-opencall.tet:8080/lineLogin.html';
     window.lineRedirectUri = location.protocol + '//' + location.host + location.pathname;
-    window.lineChannelSecret = '76af0068c610f74ca8d1539dd98d9f92';
+    window.lineChannelSecret = '938ac9c61da6ffc225d5989d413df162';
 
     window.onload = function () {
         let url = location.href;
@@ -122,7 +122,11 @@
                         + 'https://www.facebook.com/sharer.php?u='
                         + SHARE_LINK_URL + '&quote='
                         + SHARE_LINK_TEXT
-                        + '" target="_blank">分享</a>'
+                        + '" target="_blank">分享</a>';
+                    let countTarget = target.closest('.text-folio-info').find('[data-js="getVote"]');
+                    let count = countTarget.text();
+                    countTarget.text(parseInt(count) + 1);
+
                     alert('投票成功');
                     // Swal.fire({
                     //     title: "投票成功",
