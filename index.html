@@ -302,8 +302,8 @@
                                 <h2 class="text-2">作者名</h2>
                                 <div class="text-folio-info">
                                     <h3>作品名稱列，作品名稱列</h3>
-                                    <h5>得票數 <span>1,234</span></h5>  
-                                    <div class="text-folio-vote">
+                                    <h5>得票數 <span data-id="1" data-js="getVote">-</span></h5>
+                                    <div class="text-folio-vote" data-id="1" data-js="toVote">
                                         <a>投票</a>  
                                     </div>  
                                 </div>
@@ -321,8 +321,8 @@
                                 <h2 class="text-2">作者名2</h2>
                                 <div class="text-folio-info">
                                     <h3>作品名稱列，作品名稱列</h3>
-                                    <h5>得票數 <span>1,234</span></h5>  
-                                    <div class="text-folio-vote">
+                                    <h5>得票數 <span data-id="2" data-js="getVote">-</span></h5>
+                                    <div class="text-folio-vote" data-id="2" data-js="toVote">
                                         <a>投票</a>  
                                     </div>  
                                 </div>
@@ -342,8 +342,8 @@
                                 <h2 class="text-2">作者名</h2>
                                 <div class="text-folio-info">
                                     <h3>作品名稱列，作品名稱列</h3>
-                                    <h5>得票數 <span>1,234</span></h5>  
-                                    <div class="text-folio-vote">
+                                    <h5>得票數 <span data-id="3" data-js="getVote">-</span></h5>
+                                    <div class="text-folio-vote" data-id="3" data-js="toVote">
                                         <a>投票</a>  
                                     </div>
                                 </div>
@@ -361,9 +361,9 @@
                                 <h2 class="text-2">作者名</h2>
                                 <div class="text-folio-info">
                                     <h3>作品名稱列，作品名稱列</h3>
-                                    <h5>得票數 <span>1,234</span></h5>  
-                                    <div class="text-folio-vote text-folio-voted">
-                                        <a>今日已投票</a>  
+                                    <h5>得票數 <span data-id="4" data-js="getVote">-</span></h5>
+                                    <div class="text-folio-vote" data-id="4" data-js="toVote">
+                                        <a>投票</a>
                                     </div>  
                                 </div>
                             </div>
@@ -382,8 +382,8 @@
                                 <h2 class="text-2">作者名</h2>
                                 <div class="text-folio-info">
                                     <h3>作品名稱列，作品名稱列</h3>
-                                    <h5>得票數 <span>1,234</span></h5>  
-                                    <div class="text-folio-vote">
+                                    <h5>得票數 <span data-id="5" data-js="getVote">-</span></h5>
+                                    <div class="text-folio-vote" data-id="5" data-js="toVote">
                                         <a>投票</a>  
                                     </div>  
                                 </div>
@@ -401,10 +401,10 @@
                                 <h2 class="text-2">作者名</h2>
                                 <div class="text-folio-info">
                                     <h3>作品名稱列，作品名稱列</h3>
-                                    <h5>得票數 <span>1,234</span></h5>  
-                                    <div class="text-folio-vote text-folio-voted">
-                                        <a>今日已投票</a>  
-                                    </div>  
+                                    <h5>得票數 <span data-id="6" data-js="getVote">-</span></h5>
+                                    <div class="text-folio-vote" data-id="6" data-js="toVote">
+                                        <a>投票</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -603,7 +603,8 @@
 
     <script type="text/javascript" src="assets/js/jquery.min.js"></script>
     <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
-
+    <script src="assets/js/jwt-decode.js"></script>
+    <script src="assets/js/lineLogin.js"></script>
 </body>
 
 </html>
