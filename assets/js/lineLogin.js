@@ -21,7 +21,7 @@
             }
         }
 
-        toGetLineUser();
+        toGetLineUser(true);
     };
 
     $(document).on('click', '[data-js="voteBtn"][data-vote-type="true"]', function () {
@@ -47,7 +47,7 @@
         window.location.href = url;
     }
 
-    function toGetLineUser() {
+    function toGetLineUser(onload = false) {
         let url = 'https://api.line.me/oauth2/v2.1/token';
 
         for (let i in window.urlParam) {
@@ -84,7 +84,11 @@
                 },
                 error: function (res) {
                     if (400 == res.status) {
-                        toLoginLineUser();
+                        if (false == onload) {
+                            toLoginLineUser();
+                        } else {
+                            toGet();
+                        }
                     }
                 }
             });
