@@ -2375,7 +2375,6 @@ header nav .nav-item-download a.nav-link {
   }
 
   header nav .nav-item-download {
-    margin-bottom: 20px;
     background: transparent;
     border: none;
   }
@@ -2432,6 +2431,10 @@ header nav .nav-item-download a.nav-link {
 
   .content-item-download {
     margin-top: 30px;
+  }
+  header nav .nav-item:nth-last-child(1) {
+    margin-left: 0px;
+    margin-bottom: 20px;
   }
 }
 
