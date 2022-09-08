@@ -1225,17 +1225,34 @@ h1.title {
 } */
 
 .folio-content .folio-item .img-folio img {
-  -webkit-filter: grayscale(40%);
+  /* -webkit-filter: grayscale(40%); */
   /* Safari 6.0 - 9.0 */
-  filter: grayscale(40%);
+  /* filter: grayscale(40%); */
 }
 
-.folio-content .folio-item .img-folio:hover img {
-  -webkit-filter: grayscale(0%);
-  /* Safari 6.0 - 9.0 */
-  filter: grayscale(0%);
+.folio-content .folio-item .img-folio .img-block {
+  position: relative;
 }
-.img-folio.img-award {
+.folio-content .folio-item .img-folio .img-block::after {
+  content: '';
+  position: absolute;
+  display: block;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  opacity: .2;
+}
+.folio-content .folio-item .img-folio:hover .img-block::after {
+  /* -webkit-filter: grayscale(0%); */
+  /* Safari 6.0 - 9.0 */
+  /* filter: grayscale(0%); */
+  opacity: 0;
+}
+
+/* 獎項icon */
+/* .img-folio.img-award {
   position: relative;
 }
 .img-folio.img-award1:after {
@@ -1281,7 +1298,8 @@ h1.title {
   height: 70px;
   background-image: url(../img/award-icon4.png);
   background-size: cover;
-}
+} */
+/* 獎項icon end*/
 
 
 .folio-content .folio-item .text-folio h2.text-1 {
@@ -1329,7 +1347,7 @@ h1.title {
 }
 
 .text-folio-info h3 {
-  font-size: 20px;
+  font-size: 22px;
   font-weight: 300;
 }
 
@@ -1362,6 +1380,7 @@ h1.title {
 .text-folio-info .text-folio-vote a {
   font-size: 15px;
   color: #5fc0c5;
+  display: block;
 }
 
 /* 已投票 */
