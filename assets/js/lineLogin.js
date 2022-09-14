@@ -8,6 +8,11 @@
     window.lineChannelSecret = '76af0068c610f74ca8d1539dd98d9f92';
 
     window.onload = function () {
+        //投票結束時開啟
+        //return;
+        //＋html btn 換字
+    
+
         let url = location.href;
 
         if(-1 != url.indexOf('?'))
@@ -25,6 +30,8 @@
     };
 
     $(document).on('click', '[data-js="voteBtn"][data-vote-type="true"]', function () {
+        //投票結束時開啟
+        //return;
         let target = $(this).closest('[data-js="vote"]');
         let story = target.attr('data-vote-id');
         let type = target.find('[data-js="voteBtn"]').attr('data-vote-type');
