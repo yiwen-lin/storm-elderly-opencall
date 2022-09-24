@@ -1252,7 +1252,7 @@ h1.title {
 }
 
 /* 獎項icon */
-/* .img-folio.img-award {
+.img-folio.img-award {
   position: relative;
 }
 .img-folio.img-award1:after {
@@ -1298,9 +1298,8 @@ h1.title {
   height: 70px;
   background-image: url(../img/award-icon4.png);
   background-size: cover;
-} */
+}
 /* 獎項icon end*/
-
 
 .folio-content .folio-item .text-folio h2.text-1 {
   position: absolute;
@@ -1365,27 +1364,30 @@ h1.title {
 .text-folio-info .text-folio-vote {
   border-radius: 50px;
   border: 1px solid #000;
-  background-color: #fff;
+  /* background-color: #fff; */
   padding: 6px 0px;
   transition: .3s;
   display: inline-block;
   margin-top: 6px;
   width: 130px;
+
+  background-color: #aaa;
+  cursor: not-allowed;
 }
 
 .text-folio-info .text-folio-vote:hover {
-  background-color: #000;
+  /* background-color: #000; */
 }
 
 .text-folio-info .text-folio-vote a {
   font-size: 15px;
-  color: #5fc0c5;
+  /* color: #5fc0c5; */
   display: block;
+  color: #555;
 }
 
 /* 已投票 */
-.text-folio-vote.text-folio-voted {
-  /* border: 1px solid #aaa; */
+/* .text-folio-vote.text-folio-voted {
   background-color: #aaa;
   cursor: not-allowed;
 }
@@ -1395,13 +1397,12 @@ h1.title {
 }
 
 .text-folio-info .text-folio-voted:hover {
-  /* border: 1px solid #aaa; */
   background-color: #aaa;
 }
 
 .text-folio-info .text-folio-voted:hover a {
   color: #555;
-}
+} */
 
 @media (max-width: 820px) {
   .main-title {
